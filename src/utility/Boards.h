@@ -655,7 +655,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 
 // ESP8266
 // note: boot mode GPIOs 0, 2 and 15 can be used as outputs, GPIOs 6-11 are in use for flash IO
-#elif defined(ESP8266)
+#elif defined(ARDUINO_ARCH_ESP8266)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
 #define TOTAL_PINS              A0 + NUM_ANALOG_INPUTS
 #define PIN_SERIAL_RX           3
@@ -748,15 +748,39 @@ void analogWrite(uint8_t channel, uint32_t value);
 #define PIN_TO_SERVO(p)         (p)
 
 // Raspberry Pi Pico
+#elif defined(ARDUINO_ARCH_RP2040)
+// Pinout:
 // https://datasheets.raspberrypi.org/pico/Pico-R3-A4-Pinout.pdf
-#elif defined(TARGET_RP2040) || defined(TARGET_RASPBERRY_PI_PICO)
+// Use RP2040 board package:
+// https://github.com/earlephilhower/arduino-pico
 
-#include <stdarg.h>
+#if defined(ARDUINO_SEEED_XIAO_RP2040)
+#define PIN_SERIAL_TX (PIN_SERIAL1_TX)
+#define PIN_SERIAL_RX (PIN_SERIAL1_RX)
 
-static inline void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, int mode)
-{
-  attachInterrupt(interruptNumber, callback, (PinStatus) mode);
-}
+#define PIN_SPI_MISO  (PIN_SPI1_MISO)
+#define PIN_SPI_MOSI  (PIN_SPI1_MOSI)
+#define PIN_SPI_SCK   (PIN_SPI1_SCK)
+#define PIN_SPI_SS    (PIN_SPI1_SS)
+
+#define PIN_WIRE_SDA  (PIN_WIRE0_SDA)
+#define PIN_WIRE_SCL  (PIN_WIRE0_SCL)
+
+#elif defined(ARDUINO_RASPBERRY_PI_PICO)
+#error ToDo: Update the correct pin assignments
+#define PIN_SERIAL_TX (PIN_SERIAL1_TX)
+#define PIN_SERIAL_RX (PIN_SERIAL1_RX)
+
+#define PIN_SPI_MISO  (PIN_SPI1_MISO)
+#define PIN_SPI_MOSI  (PIN_SPI1_MOSI)
+#define PIN_SPI_SCK   (PIN_SPI1_SCK)
+#define PIN_SPI_SS    (PIN_SPI1_SS)
+
+#define PIN_WIRE_SDA  (PIN_WIRE0_SDA)
+#define PIN_WIRE_SCL  (PIN_WIRE0_SCL)
+#else
+#error Unknown board with Raspberry Pico 2040 architecture
+#endif
 
 #define TOTAL_ANALOG_PINS       4
 #define TOTAL_PINS              30
@@ -765,21 +789,13 @@ static inline void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callb
 #define IS_PIN_ANALOG(p)        ((p) >= 26 && (p) < 26 + TOTAL_ANALOG_PINS)
 #define IS_PIN_PWM(p)           digitalPinHasPWM(p)
 #define IS_PIN_SERVO(p)         (IS_PIN_DIGITAL(p) && (p) != LED_BUILTIN)
-// From the data sheet I2C-0 defaults to GP 4 (SDA) & 5 (SCL) (physical pins 6 & 7)
-// However, v2.3.1 of mbed_rp2040 defines WIRE_HOWMANY to 1 and uses the non-default GPs 6 & 7:
-//#define WIRE_HOWMANY	(1)
-//#define PIN_WIRE_SDA            (6u)
-//#define PIN_WIRE_SCL            (7u)
 #define IS_PIN_I2C(p)           ((p) == PIN_WIRE_SDA || (p) == PIN_WIRE_SCL)
-// SPI-0 defaults to GP 16 (RX / MISO), 17 (CSn), 18 (SCK) & 19 (TX / MOSI) (physical pins 21, 22, 24, 25)
 #define IS_PIN_SPI(p)           ((p) == PIN_SPI_SCK || (p) == PIN_SPI_MOSI || (p) == PIN_SPI_MISO || (p) == PIN_SPI_SS)
-// UART-0 defaults to GP 0 (TX) & 1 (RX)
-#define IS_PIN_SERIAL(p)        ((p) == 0 || (p) == 1 || (p) == 4 || (p) == 5 || (p) == 8 || (p) == 9 || (p) == 12 || (p) == 13 || (p) == 16 || (p) == 17)
+#define IS_PIN_SERIAL(p)        ((p) == PIN_SERIAL_TX || (p) == PIN_SERIAL_RX)
 #define PIN_TO_DIGITAL(p)       (p)
 #define PIN_TO_ANALOG(p)        ((p) - 26)
 #define PIN_TO_PWM(p)           (p)
 #define PIN_TO_SERVO(p)         (p)
-
 
 // anything else
 #else
