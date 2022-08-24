@@ -160,7 +160,9 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_ANALOG(p)        ((p) - 14)
 #define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
 #define PIN_TO_SERVO(p)         ((p) - 2)
+#if !defined(WIN32)
 #define ARDUINO_PINOUT_OPTIMIZE 1
+#endif
 
 #elif defined(AVR_NANO_EVERY) || defined(ARDUINO_NANO_EVERY) || defined(ARDUINO_AVR_NANO_EVERY)
 #define TOTAL_ANALOG_PINS 8
@@ -206,7 +208,9 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_ANALOG(p)        ((p) - 14)
 #define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
 #define PIN_TO_SERVO(p)         ((p) - 2)
+#if !defined(WIN32)
 #define ARDUINO_PINOUT_OPTIMIZE 1
+#endif
 
 
 // Arduino Mega
