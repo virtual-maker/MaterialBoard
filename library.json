@@ -1,12 +1,12 @@
 {
-  "name": "ConfigurableFirmata",
+  "name": "MaterialBoard",
   "keywords": "interface, protocol",
   "description": "This library implements the Firmata protocol as a set of plugins that can be used to create applications to remotely interface with an Arduino board.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/firmata/ConfigurableFirmata.git"
+    "url": "https://github.com/virtual-maker/MaterialBoard"
   },
-  "version": "2.11.0",
+  "version": "1.0.0",
   "exclude": [
     "extras",
     "test"
