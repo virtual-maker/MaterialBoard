@@ -45,6 +45,10 @@ void handleSetPinValueCallback(byte pin, int value)
 DigitalOutputFirmata::DigitalOutputFirmata()
 {
   DigitalOutputFirmataInstance = this;
+}
+
+void DigitalOutputFirmata::attach()
+{
   Firmata.attach(DIGITAL_MESSAGE, digitalOutputWriteCallback);
   Firmata.attach(SET_DIGITAL_PIN_VALUE, handleSetPinValueCallback);
 }

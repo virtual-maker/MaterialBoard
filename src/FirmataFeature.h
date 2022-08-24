@@ -26,6 +26,7 @@ class FirmataFeature
     virtual boolean handlePinMode(byte pin, int mode) = 0;
     virtual boolean handleSysex(byte command, byte argc, byte* argv) = 0;
     virtual void reset() = 0;
+    virtual void attach() = 0;
 
     /// <summary>
     /// Regularly called by main thread

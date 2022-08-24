@@ -38,6 +38,7 @@ class FirmataReporting: public FirmataFeature
     boolean handlePinMode(byte pin, int mode); //empty method
     boolean handleSysex(byte command, byte argc, byte* argv);
     void reset();
+    void attach() {};
 
     boolean elapsed();
   private:

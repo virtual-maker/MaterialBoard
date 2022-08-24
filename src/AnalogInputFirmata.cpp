@@ -31,6 +31,10 @@ AnalogInputFirmata::AnalogInputFirmata()
 {
   AnalogInputFirmataInstance = this;
   analogInputsToReport = 0;
+}
+
+void AnalogInputFirmata::attach()
+{
   Firmata.attach(REPORT_ANALOG, reportAnalogInputCallback);
 }
 

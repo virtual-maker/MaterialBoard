@@ -24,7 +24,11 @@
 
 AnalogOutputFirmata::AnalogOutputFirmata()
 {
-    Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
+}
+
+void AnalogOutputFirmata::attach()
+{
+  Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
 }
 
 void AnalogOutputFirmata::reset()

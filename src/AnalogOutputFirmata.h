@@ -26,14 +26,17 @@ void analogWriteCallback(byte pin, int value);
 
 class AnalogOutputFirmata: public FirmataFeature
 {
+#if !defined(WIN32)
     friend void analogWrite(byte pin, uint32_t value);
+#endif
   public:
     AnalogOutputFirmata();
     void handleCapability(byte pin);
     boolean handlePinMode(byte pin, int mode);
     boolean handleSysex(byte command, byte argc, byte* argv);
     void reset();
-  private:
+    void attach();
+private:
       void setupPwmPin(byte pin);
 #if ESP32
       int getChannelForPin(byte pin);

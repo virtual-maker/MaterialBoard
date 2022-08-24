@@ -35,6 +35,10 @@ DigitalInputFirmata::DigitalInputFirmata()
     reportPINs[i] = 0;
   }
   DigitalInputFirmataInstance = this;
+}
+
+void DigitalInputFirmata::attach()
+{
   Firmata.attach(REPORT_DIGITAL, reportDigitalInputCallback);
 }
 

@@ -55,6 +55,7 @@ class I2CFirmata: public FirmataFeature
     void handleCapability(byte pin);
     boolean handleSysex(byte command, byte argc, byte* argv);
     void reset();
+    void attach() {};
     void report(bool elapsed) override;
 
   private:

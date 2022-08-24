@@ -38,13 +38,20 @@ void handleSysexCallback(byte command, byte argc, byte* argv)
 FirmataExt::FirmataExt()
 {
   FirmataExtInstance = this;
-  Firmata.attach(SET_PIN_MODE, handleSetPinModeCallback);
-  Firmata.attach((byte)START_SYSEX, handleSysexCallback);
     for (int i = 0; i < MAX_FEATURES; i++)
     {
         features[i] = nullptr;
     }
   numFeatures = 0;
+}
+
+void FirmataExt::attach()
+{
+    Firmata.attach(SET_PIN_MODE, handleSetPinModeCallback);
+    Firmata.attach((byte)START_SYSEX, handleSysexCallback);
+    for (byte i = 0; i < numFeatures; i++) {
+        features[i]->attach();
+    }
 }
 
 void FirmataExt::handleCapability(byte pin)

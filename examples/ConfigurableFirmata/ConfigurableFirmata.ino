@@ -65,7 +65,7 @@ I2CFirmata i2c;
 #endif
 
 #ifdef ENABLE_SPI
-#include <Wire.h>
+#include <SPI.h>
 #include <SpiFirmata.h>
 SpiFirmata spi;
 #endif
@@ -203,6 +203,7 @@ void initFirmata()
   firmataExt.addFeature(frequency);
 #endif
 
+  firmataExt.attach();
   Firmata.attach(SYSTEM_RESET, systemResetCallback);
 }
 

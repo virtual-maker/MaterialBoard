@@ -54,7 +54,8 @@ class SpiFirmata: public FirmataFeature
     void handleCapability(byte pin);
     boolean handleSysex(byte command, byte argc, byte* argv);
     void reset();
-    void report();
+	void attach() {};
+	void report();
 
   private:
     void handleSpiRequest(byte command, byte argc, byte *argv);
@@ -199,7 +200,7 @@ void SpiFirmata::handleSpiTransfer(byte argc, byte *argv, boolean dummySend, int
 	// If we just need to send a confirmation message, we can do so now, as we have already copied the input buffer (and we're running synchronously, anyway)
 	if (sendReply == SPI_SEND_EMPTY_REPLY)
 	{
-		byte reply[7];
+		byte reply[7]{};
 		reply[0] = START_SYSEX;
 		reply[1] = SPI_DATA;
 		reply[2] = SPI_REPLY;
@@ -210,7 +211,8 @@ void SpiFirmata::handleSpiTransfer(byte argc, byte *argv, boolean dummySend, int
 		Firmata.write(reply, 7);
 	}
 
-	if (config[index].csPin != -1)
+	boolean handleCsPin = config[index].csPin != 255;
+	if (handleCsPin)
 	{
 		digitalWrite(config[index].csPin, LOW);
 	}
@@ -218,7 +220,7 @@ void SpiFirmata::handleSpiTransfer(byte argc, byte *argv, boolean dummySend, int
 	SPI.beginTransaction(config[index].spi_settings);
 	SPI.transfer(data, bytesToSend);
 	SPI.endTransaction();
-	if (argv[2] != 0)
+	if (handleCsPin && argv[2] != 0)
 	{
 		// Default is deselect, so only skip this if the value is 0
 		digitalWrite(config[index].csPin, HIGH);
@@ -309,7 +311,7 @@ boolean SpiFirmata::handleSpiConfig(byte argc, byte* argv)
 	cfg.spi_settings = SPISettings(speed, bitOrder == 1 ? MSBFIRST : LSBFIRST, dataMode);
 	if ((cfg.csPinOptions & 0x1) == 0)
 	{
-		cfg.csPin = -1;
+		cfg.csPin = 255;
 	}
 	else
 	{
@@ -317,7 +319,7 @@ boolean SpiFirmata::handleSpiConfig(byte argc, byte* argv)
 		pinMode(cfg.csPin, OUTPUT);
 	}
 
-	Firmata.sendStringf(F("New SPI device %d allocated with index %d and CS %d, clock speed %d Hz"), deviceIdChannel, index, config[index].csPin, speed);
+	Firmata.sendStringf(F("New SPI device %d allocated with index %d and CS %d, clock speed %lu Hz"), deviceIdChannel, index, config[index].csPin, speed);
 	return true;
 }
 

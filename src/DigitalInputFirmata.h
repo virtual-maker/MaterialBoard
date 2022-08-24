@@ -32,6 +32,7 @@ class DigitalInputFirmata: public FirmataFeature
     boolean handleSysex(byte command, byte argc, byte* argv);
     boolean handlePinMode(byte pin, int mode);
     void reset();
+    void attach();
 
   private:
     /* digital input ports */

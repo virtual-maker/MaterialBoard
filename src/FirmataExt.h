@@ -35,6 +35,7 @@ class FirmataExt: public FirmataFeature
     boolean handleSysex(byte command, byte argc, byte* argv);
     void addFeature(FirmataFeature &capability);
     void reset();
+    void attach();
     void report(bool elapsed) override;
   private:
     FirmataFeature *features[MAX_FEATURES];
