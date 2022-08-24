@@ -19,7 +19,7 @@
 #ifndef AnalogWrite_h
 #define AnalogWrite_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 
 #if defined AnalogOutputFirmata_h || defined ServoFirmata_h
 

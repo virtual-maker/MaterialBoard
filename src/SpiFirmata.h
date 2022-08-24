@@ -13,7 +13,7 @@
 #ifndef SpiFirmata_h
 #define SpiFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 
 #include <SPI.h>
 #include "FirmataFeature.h"
@@ -316,10 +316,11 @@ boolean SpiFirmata::handleSpiConfig(byte argc, byte* argv)
 	else
 	{
 		Firmata.setPinMode(cfg.csPin, PIN_MODE_OUTPUT);
+		digitalWrite(cfg.csPin, HIGH);
 		pinMode(cfg.csPin, OUTPUT);
 	}
 
-	Firmata.sendStringf(F("New SPI device %d allocated with index %d and CS %d, clock speed %lu Hz"), deviceIdChannel, index, config[index].csPin, speed);
+	////Firmata.sendStringf(F("New SPI device %d allocated with index %d and CS %d, clock speed %lu Hz"), deviceIdChannel, index, config[index].csPin, speed);
 	return true;
 }
 

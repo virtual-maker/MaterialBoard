@@ -17,7 +17,7 @@
 #ifndef AnalogOutputFirmata_h
 #define AnalogOutputFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 
 // analogWriteCallback is defined in AnalogWrite.h but must also be declared here in order

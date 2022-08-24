@@ -16,7 +16,7 @@
   Last updated by Jeff Hoefs: November 22nd, 2015
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "AnalogFirmata.h"
 #include "AnalogInputFirmata.h"
 

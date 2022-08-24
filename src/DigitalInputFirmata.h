@@ -17,7 +17,7 @@
 #ifndef DigitalInputFirmata_h
 #define DigitalInputFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 
 void reportDigitalInputCallback(byte port, int value);

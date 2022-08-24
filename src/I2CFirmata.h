@@ -14,7 +14,7 @@
   See file LICENSE.txt for further informations on licensing terms.
 
   I2CFirmata.cpp has been merged into this header file as a hack to avoid having to
-  include Wire.h for every arduino sketch that includes ConfigurableFirmata.
+  include Wire.h for every arduino sketch that includes MaterialBoard.
 
   Last updated by Jeff Hoefs: January 23rd, 2015
 */
@@ -22,7 +22,7 @@
 #ifndef I2CFirmata_h
 #define I2CFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 #include "FirmataReporting.h"
 

@@ -16,7 +16,7 @@
   Last updated by Jeff Hoefs: November 15th, 2015
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataExt.h"
 
 FirmataExt *FirmataExtInstance;

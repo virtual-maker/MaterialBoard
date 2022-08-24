@@ -16,12 +16,13 @@
 //* Includes
 //******************************************************************************
 
-#include "ConfigurableFirmata.h"
+#include "MaterialBoard.h"
 #include "HardwareSerial.h"
 
 extern "C" {
 #include <string.h>
 #include <stdlib.h>
+#include <stdarg.h>
 }
 
 //******************************************************************************

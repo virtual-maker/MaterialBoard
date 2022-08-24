@@ -16,7 +16,7 @@
 #ifndef StepperFirmata_h
 #define StepperFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "utility/FirmataStepper.h"
 #include "FirmataFeature.h"
 

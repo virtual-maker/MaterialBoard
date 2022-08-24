@@ -15,7 +15,7 @@
   Last updated by Jeff Hoefs: January 23rd, 2016
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "StepperFirmata.h"
 #include "utility/FirmataStepper.h"
 

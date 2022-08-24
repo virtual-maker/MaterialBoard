@@ -16,7 +16,7 @@
   Last updated by Jeff Hoefs: February 16th, 2016
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "DigitalOutputFirmata.h"
 
 DigitalOutputFirmata *DigitalOutputFirmataInstance;

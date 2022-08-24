@@ -14,7 +14,7 @@
   See file LICENSE.txt for further informations on licensing terms.
 
   ServoFirmata.cpp has been merged into this header file as a hack to avoid having to
-  include Servo.h for every arduino sketch that includes ConfigurableFirmata.
+  include Servo.h for every arduino sketch that includes MaterialBoard.
 
   Last updated by Jeff Hoefs: November 15th, 2015
 */
@@ -23,7 +23,7 @@
 #define ServoFirmata_h
 
 #include <Servo.h>
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 
 void servoAnalogWrite(byte pin, int value);
@@ -47,7 +47,7 @@ class ServoFirmata: public FirmataFeature
 /*
  * ServoFirmata.cpp
  * Copied here as a hack to avoid having to include Servo.h in all sketch files that
- * include ConfigurableFirmata.h
+ * include MaterialBoard.h
  */
 
 ServoFirmata *ServoInstance;

@@ -1,10 +1,10 @@
  /*
   * I2CFirmata.cpp
   * Copied here as a hack to avoid having to include Wire.h in all sketch files that
-  * include ConfigurableFirmata.h
+  * include MaterialBoard.h
   */
 
-#include "ConfigurableFirmata.h"
+#include "MaterialBoard.h"
 #include "Wire.h"
 #include "I2CFirmata.h"
 

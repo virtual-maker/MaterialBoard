@@ -16,7 +16,7 @@
 #ifndef AccelStepperFirmata_h
 #define AccelStepperFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "utility/AccelStepper.h"
 #include "utility/MultiStepper.h"
 #include "FirmataFeature.h"

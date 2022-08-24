@@ -16,7 +16,7 @@
   Last updated December 23rd, 2016
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "AnalogFirmata.h"
 #include "AnalogOutputFirmata.h"
 
@@ -30,11 +30,15 @@ AnalogOutputFirmata* AnalogOutputFirmataInstance;
 AnalogOutputFirmata::AnalogOutputFirmata()
 {
     AnalogOutputFirmataInstance = this;
-    Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
     for (int i = 0; i < MAX_PWM_CHANNELS; i++)
     {
         _pwmChannelMap[i] = 255;
     }
+}
+
+void AnalogOutputFirmata::attach()
+{
+    Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
 }
 
 void AnalogOutputFirmata::reset()

@@ -13,7 +13,7 @@
 #ifndef DhtFirmata_h
 #define DhtFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 
 #include "FirmataFeature.h"
 #include "FirmataReporting.h"

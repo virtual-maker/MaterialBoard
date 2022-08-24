@@ -14,7 +14,7 @@
   See file LICENSE.txt for further informations on licensing terms.
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 #include "FirmataReporting.h"
 

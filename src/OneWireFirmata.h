@@ -14,7 +14,7 @@
 #ifndef OneWireFirmata_h
 #define OneWireFirmata_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #define ONEWIRE_CRC 0 //for OneWire.h: crc-functions are not used by Firmata
 #include "utility/OneWire.h"
 #include "FirmataFeature.h"

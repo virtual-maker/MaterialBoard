@@ -15,7 +15,7 @@
   Last updated: September 16th, 2017
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "AccelStepperFirmata.h"
 #include "utility/AccelStepper.h"
 #include "utility/MultiStepper.h"

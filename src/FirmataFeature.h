@@ -17,7 +17,7 @@
 #ifndef FirmataFeature_h
 #define FirmataFeature_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 
 class FirmataFeature
 {

@@ -10,12 +10,12 @@
   See file LICENSE.txt for further informations on licensing terms.
 */
 
-#ifndef ConfigurableFirmataIncludes_h
-#define ConfigurableFirmataIncludes_h
+#ifndef MaterialBoardIncludes_h
+#define MaterialBoardIncludes_h
 
 // General includes for the Visual C++ compiler
 
-#include "../ConfigurableFirmata.cpp"
+#include "../MaterialBoard.cpp"
 #include "../DigitalInputFirmata.cpp"
 #include "../DigitalOutputFirmata.cpp"
 #include "../FirmataReporting.cpp"

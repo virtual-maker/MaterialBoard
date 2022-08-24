@@ -13,7 +13,7 @@
   Last updated by Jeff Hoefs: January 23rd, 2016
 */
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "OneWireFirmata.h"
 #include "Encoder7Bit.h"
 

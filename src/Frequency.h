@@ -17,7 +17,7 @@
 #ifndef Frquency_h
 #define Frequency_h
 
-#include <ConfigurableFirmata.h>
+#include <MaterialBoard.h>
 #include "FirmataFeature.h"
 
 #define INTERRUPT_MODE_DISABLE 0

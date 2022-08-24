@@ -661,17 +661,17 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 // note: boot mode GPIOs 0, 2 and 15 can be used as outputs, GPIOs 6-11 are in use for flash IO
 #elif defined(ARDUINO_ARCH_ESP8266)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
-#define TOTAL_PINS              A0 + NUM_ANALOG_INPUTS
+#define TOTAL_PINS              A0 + NUM_ANALOG_INPUTS //<!  // 14 digital + 6 analog
 #define PIN_SERIAL_RX           3
 #define PIN_SERIAL_TX           1
-#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 5) || ((p) >= 12 && (p) < A0))
+#define IS_PIN_SERIAL(p)        ((p) == PIN_SERIAL_RX || (p) == PIN_SERIAL_TX)
+#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 5 && !IS_PIN_SERIAL(p)) || ((p) >= 12 && (p) < A0))
 #define IS_PIN_ANALOG(p)        ((p) >= A0 && (p) < A0 + NUM_ANALOG_INPUTS)
 #define IS_PIN_PWM(p)           digitalPinHasPWM(p)
 #define IS_PIN_SERVO(p)         (IS_PIN_DIGITAL(p) && (p) < MAX_SERVOS)
 #define IS_PIN_I2C(p)           ((p) == SDA || (p) == SCL)
 #define IS_PIN_SPI(p)           ((p) == SS || (p) == MOSI || (p) == MISO || (p) == SCK)
 #define IS_PIN_INTERRUPT(p)     (digitalPinToInterrupt(p) > NOT_AN_INTERRUPT)
-#define IS_PIN_SERIAL(p)        ((p) == PIN_SERIAL_RX || (p) == PIN_SERIAL_TX)
 #define PIN_TO_DIGITAL(p)       (p)
 #define PIN_TO_ANALOG(p)        ((p) - A0)
 #define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
@@ -699,6 +699,65 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_PWM(p)           (p)
 #define PIN_TO_SERVO(p)         (p)
 #define DEFAULT_PWM_RESOLUTION  PWM_RESOLUTION
+
+
+// ESP32-C3 LOLIN C3 mini
+// note: boot mode GPIO 9 can be used as output
+#elif defined(CONFIG_IDF_TARGET_ESP32C3)
+#define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
+#define TOTAL_PINS              NUM_DIGITAL_PINS
+#define VERSION_BLINK_PIN       LED_BUILTIN
+#define digitalPinHasSPI(p)     ((p) == SS || (p) == MOSI || (p) == MISO || (p) == SCK)
+#define PIN_SPI_MOSI            MOSI
+#define PIN_SPI_MISO            MISO
+#define PIN_SPI_SCK             SCK
+#define digitalPinHasSerial(p)  ((p) == 20 || (p) == 21)
+// Pins 20 and 21 are used for the USB Serial communication. If we enable them here, the initial pin reset causes the serial communication
+// to not work after boot. 
+#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 8) || (p) == 10)
+#define IS_PIN_ANALOG(p)        ((p) >= 0 && (p) <= 5)
+#define IS_PIN_PWM(p)           (IS_PIN_DIGITAL(p))
+#define IS_PIN_SERVO(p)         IS_PIN_DIGITAL(p)
+#define IS_PIN_I2C(p)           ((p == SDA) || (p == SCL))
+#define IS_PIN_SPI(p)           (IS_PIN_DIGITAL(p) && digitalPinHasSPI(p))
+#define IS_PIN_INTERRUPT(p)     (digitalPinToInterrupt(p) > NOT_AN_INTERRUPT)
+#define IS_PIN_SERIAL(p)        (digitalPinHasSerial(p))
+#define PIN_TO_DIGITAL(p)       (p)
+#define PIN_TO_ANALOG(p)        (p-A0)
+#define PIN_TO_PWM(p)           (p)
+#define PIN_TO_SERVO(p)         (p)
+#define DEFAULT_PWM_RESOLUTION  13 // ToDo: check this
+#define DEFAULT_ADC_RESOLUTION  12 // ToDo: check this
+#define LARGE_MEM_DEVICE        320 // ToDo: check this
+
+// ESP32-S2 LOLIN S2 mini
+// note: boot mode GPIO 0 can be used as output // ToDo: check this
+#elif defined(CONFIG_IDF_TARGET_ESP32S2)
+#define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
+#define TOTAL_PINS              NUM_DIGITAL_PINS
+#define VERSION_BLINK_PIN       LED_BUILTIN
+#define digitalPinHasSPI(p)     ((p) == SS || (p) == MOSI || (p) == MISO || (p) == SCK)
+#define PIN_SPI_MOSI            MOSI
+#define PIN_SPI_MISO            MISO
+#define PIN_SPI_SCK             SCK
+#define digitalPinHasSerial(p)  ((p) == RX || (p) == TX)
+// Pins 37 and 39 are used for the USB Serial communication. If we enable them here, the initial pin reset causes the serial communication
+// to not work after boot. 
+#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 18) || (p) == 21 || ((p) >= 33 && (p) <= 40 && !digitalPinHasSerial(p)))
+#define IS_PIN_ANALOG(p)        ((p) >= A0 && (p) <= A19)
+#define IS_PIN_PWM(p)           (IS_PIN_DIGITAL(p))
+#define IS_PIN_SERVO(p)         IS_PIN_DIGITAL(p)
+#define IS_PIN_I2C(p)           ((p == SDA) || (p == SCL))
+#define IS_PIN_SPI(p)           (IS_PIN_DIGITAL(p) && digitalPinHasSPI(p))
+#define IS_PIN_INTERRUPT(p)     (digitalPinToInterrupt(p) > NOT_AN_INTERRUPT)
+#define IS_PIN_SERIAL(p)        (digitalPinHasSerial(p))
+#define PIN_TO_DIGITAL(p)       (p)
+#define PIN_TO_ANALOG(p)        (p-A0)
+#define PIN_TO_PWM(p)           (p)
+#define PIN_TO_SERVO(p)         (p)
+#define DEFAULT_PWM_RESOLUTION  13 // ToDo: check this
+#define DEFAULT_ADC_RESOLUTION  12 // ToDo: check this
+#define LARGE_MEM_DEVICE        320 // ToDo: check this
 
 // ESP32
 // GPIO 6-11 are used for FLASH I/O, therefore they're unavailable here
