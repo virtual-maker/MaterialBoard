@@ -388,6 +388,22 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_SERVO(p)         (p)
 
 
+// Seeed XIAO M0
+#elif defined(ARDUINO_SEEED_XIAO_M0)
+#define TOTAL_ANALOG_PINS       11
+#define TOTAL_PINS              14 // 11 digital + 3 led
+#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 13) && !IS_PIN_SERIAL(p))
+#define IS_PIN_ANALOG(p)        ((p) >= 0 && (p) < 0 + TOTAL_ANALOG_PINS)
+#define IS_PIN_PWM(p)           digitalPinHasPWM(p)
+#define IS_PIN_SERVO(p)         (IS_PIN_DIGITAL(p) && (p) < MAX_SERVOS) // deprecated since v2.4
+#define IS_PIN_I2C(p)           ((p) == PIN_WIRE_SDA || (p) == PIN_WIRE_SCL) // //defined in variant.h SDA = 4, SCL = 5
+#define IS_PIN_SPI(p)           ((p) == SS || (p) == MOSI || (p) == MISO || (p) == SCK)
+#define IS_PIN_SERIAL(p)        ((p) == PIN_SERIAL1_RX || (p) == PIN_SERIAL1_TX) //defined in variant.h  RX = 7, TX = 6
+#define PIN_TO_DIGITAL(p)       (p)
+#define PIN_TO_ANALOG(p)        (p)
+#define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
+#define PIN_TO_SERVO(p)         (p) // deprecated since v2.4
+
 // Arduino 101
 #elif defined(_VARIANT_ARDUINO_101_X_)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
@@ -703,7 +719,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 
 // ESP32-C3 LOLIN C3 mini
 // note: boot mode GPIO 9 can be used as output
-#elif defined(CONFIG_IDF_TARGET_ESP32C3)
+#elif defined(CONFIG_IDF_TARGET_ESP32C3) && defined(ARDUINO_LOLIN_C3_MINI)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
 #define TOTAL_PINS              NUM_DIGITAL_PINS
 #define VERSION_BLINK_PIN       LED_BUILTIN
@@ -732,7 +748,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 
 // ESP32-S2 LOLIN S2 mini
 // note: boot mode GPIO 0 can be used as output // ToDo: check this
-#elif defined(CONFIG_IDF_TARGET_ESP32S2)
+#elif defined(CONFIG_IDF_TARGET_ESP32S2) && defined(ARDUINO_LOLIN_S2_MINI)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
 #define TOTAL_PINS              NUM_DIGITAL_PINS
 #define VERSION_BLINK_PIN       LED_BUILTIN
@@ -761,7 +777,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 
 // ESP32
 // GPIO 6-11 are used for FLASH I/O, therefore they're unavailable here
-#elif defined(ESP32)
+#elif defined(ARDUINO_ARCH_ESP32)
 #define TOTAL_ANALOG_PINS       NUM_ANALOG_INPUTS
 #define TOTAL_PINS              NUM_DIGITAL_PINS
 #define VERSION_BLINK_PIN       2
@@ -829,15 +845,14 @@ void analogWrite(uint8_t channel, uint32_t value);
 #define PIN_WIRE_SDA  (PIN_WIRE0_SDA)
 #define PIN_WIRE_SCL  (PIN_WIRE0_SCL)
 
-#elif defined(ARDUINO_RASPBERRY_PI_PICO)
-#error ToDo: Update the correct pin assignments
+#elif defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_W)
 #define PIN_SERIAL_TX (PIN_SERIAL1_TX)
 #define PIN_SERIAL_RX (PIN_SERIAL1_RX)
 
-#define PIN_SPI_MISO  (PIN_SPI1_MISO)
-#define PIN_SPI_MOSI  (PIN_SPI1_MOSI)
-#define PIN_SPI_SCK   (PIN_SPI1_SCK)
-#define PIN_SPI_SS    (PIN_SPI1_SS)
+#define PIN_SPI_MISO  (PIN_SPI0_MISO)
+#define PIN_SPI_MOSI  (PIN_SPI0_MOSI)
+#define PIN_SPI_SCK   (PIN_SPI0_SCK)
+#define PIN_SPI_SS    (PIN_SPI0_SS)
 
 #define PIN_WIRE_SDA  (PIN_WIRE0_SDA)
 #define PIN_WIRE_SCL  (PIN_WIRE0_SCL)
