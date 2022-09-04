@@ -1,8 +1,10 @@
 /*
- * ConfigurableFirmata standard example file, for serial communication.
+ * MaterialBoard standard example file, for serial communication.
  */
 
 #include <MaterialBoard.h>
+
+#define MB_BAUD_RATE (115200)
 
 // Use these defines to easily enable or disable certain modules
 
@@ -68,13 +70,16 @@ void systemResetCallback()
 		}
 	}
 	firmataExt.reset();
+
+  Firmata.printFirmwareVersion();
+  Firmata.printVersion();
 }
 
 void initTransport()
 {
 	// Save a couple of seconds by disabling the startup blink sequence.
 	Firmata.disableBlinkVersion();
-	Firmata.begin(115200);
+	Firmata.begin(MB_BAUD_RATE);
 }
 
 void initFirmata()
