@@ -389,10 +389,11 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 
 
 // Seeed XIAO M0
+// Pinout: https://wiki.seeedstudio.com/Seeeduino-XIAO/
 #elif defined(ARDUINO_SEEED_XIAO_M0)
 #define TOTAL_ANALOG_PINS       11
 #define TOTAL_PINS              14 // 11 digital + 3 led
-#define IS_PIN_DIGITAL(p)       (((p) >= 0 && (p) <= 13) && !IS_PIN_SERIAL(p))
+#define IS_PIN_DIGITAL(p)       ((p) >= 0 && (p) <= 13)
 #define IS_PIN_ANALOG(p)        ((p) >= 0 && (p) < 0 + TOTAL_ANALOG_PINS)
 #define IS_PIN_PWM(p)           digitalPinHasPWM(p)
 #define IS_PIN_SERVO(p)         (IS_PIN_DIGITAL(p) && (p) < MAX_SERVOS) // deprecated since v2.4
@@ -828,12 +829,11 @@ void analogWrite(uint8_t channel, uint32_t value);
 
 // Raspberry Pi Pico
 #elif defined(ARDUINO_ARCH_RP2040)
-// Pinout:
-// https://datasheets.raspberrypi.org/pico/Pico-R3-A4-Pinout.pdf
 // Use RP2040 board package:
 // https://github.com/earlephilhower/arduino-pico
 
 #if defined(ARDUINO_SEEED_XIAO_RP2040)
+// Pinout: https://wiki.seeedstudio.com/Seeeduino-XIAO/
 #define PIN_SERIAL_TX (PIN_SERIAL1_TX)
 #define PIN_SERIAL_RX (PIN_SERIAL1_RX)
 
@@ -846,6 +846,8 @@ void analogWrite(uint8_t channel, uint32_t value);
 #define PIN_WIRE_SCL  (PIN_WIRE0_SCL)
 
 #elif defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_W)
+// Pinout:
+// https://datasheets.raspberrypi.org/pico/Pico-R3-A4-Pinout.pdf
 #define PIN_SERIAL_TX (PIN_SERIAL1_TX)
 #define PIN_SERIAL_RX (PIN_SERIAL1_RX)
 
