@@ -12,8 +12,8 @@
   See file LICENSE.txt for further informations on licensing terms.
 */
 
-#ifndef Configurable_Firmata_h
-#define Configurable_Firmata_h
+#ifndef MaterialBoard_h
+#define MaterialBoard_h
 
 #include "utility/Boards.h"  /* Hardware Abstraction Layer + Wiring/Arduino */
 

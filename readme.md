@@ -1,76 +1,34 @@
-# ConfigurableFirmata
+# MaterialBoard
 
-[![Join the chat at https://gitter.im/firmata/ConfigurableFirmata](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/firmata/ConfigurableFirmata?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This *MaterialBoard* library provides the necessary firmware to transform your supported Arduino microcontroller board into a *MaterialBoard*. 
 
-Firmata is a protocol for communicating with microcontrollers from software on a host computer. The [protocol](https://github.com/firmata/protocol) can be implemented in firmware on any microcontroller architecture as well as software on any host computer software package. The arduino repository described here is a Firmata library for Arduino and Arduino-compatible devices. If you would like to contribute to Firmata, please see the [Contributing](#contributing) section below.
+In combination with the [VirtualBoard](https://github.com/virtual-maker/VirtualBoard) project, this makes it possible to run Arduino sketches "in vito" directly in the Visual Studio 2022 debugger on a Windows PC and interact at runtime with your real hardware circuit (via digital and analog pins, SPI and I2C). If the logic of the sketch code "in vito" works as expected, the sketch then can be loaded directly into the microcontroller board with the connected hardware circuit for the final tests.
 
-## Important NOTE
-
-Updates to ConfigurableFirmata are being laid out at the moment. The master branch will get new features added and existing features updated. In some cases, this may break clients or cause regressions. The last stable 2.xx release is available under [this branch](https://github.com/firmata/ConfigurableFirmata/tree/releases/v2.xx). So if you check out the repository manually (see below), be sure to switch to that branch if you need the stable version. Feedback on the current development version is welcome, of course.
+The *MaterialBoard* library is a fork of the [ConfigurableFirmata](https://github.com/firmata/ConfigurableFirmata) project and uses the [Firmata protocol](https://github.com/firmata/protocol) internally for serial communication between the PC and the *MaterialBoard*. The reason for this fork is to make the installation of the required software on your microcontroller board as easy and hassle free as possible.
 
 ## Installation
 
-- **If you are using Arduino IDE version 1.6.4 or higher** go to `Sketch > Include Library > Manage Libraries` and then search for "ConfigurableFirmata" and click on `Install` after tapping on the ConfigurableFirmata item in the filtered results. You can also use this same method to update ConfigurableFirmata in the future.
-- **If you are using an older version of the Arduino IDE**, download or clone ConfigurableFirmata to your Arduino sketchbook library folder. This is typically `/Documents/Arduino/libraries/` on Mac or Linux or `\My Documents\Arduino\libraries\` on Windows.
-- **If you want to edit things yourself or help in development**, clone this repo to `\My Documents\Arduino\libraries\ConfigurableFirmata` and start hacking. Just delete the folder if it exists already.
+- **If you are using Arduino IDE version 1.6.4 or higher** go to `Sketch > Include Library > Manage Libraries` and then search for "MaterialBoard" and click on `Install` after tapping on the MaterialBoard item in the filtered results. You can also use this same method to update MaterialBoard in the future.
+- **If you are using an older version of the Arduino IDE**, download or clone MaterialBoard to your Arduino sketchbook library folder. This is typically `/Documents/Arduino/libraries/` on Mac or Linux or `\Documents\Arduino\libraries\` on Windows.
+- **If you want to edit things yourself or help in development**, clone this repo to `\Documents\Arduino\libraries\MaterialBoard` and start hacking. Just delete the folder if it exists already.
 
 ## Usage
 
-ConfigurableFirmata is a version of Firmata that breaks features such as Digital Input, Digital Output, Analog Input, Analog Output, I2C, etc into [individual classes](https://github.com/firmata/ConfigurableFirmata/tree/master/src) making it easier to mix and match standard features with custom features.
-
-The easiest way to use ConfigurableFirmata is with [firmatabuilder](http://firmatabuilder.com) which is a simple web application that generates an Arduino sketch based on a selection of Firmata features. Download the generated sketch, compile and upload it to your board.
-
-Another way to use ConfigurableFirmata is by adding or removing various include statements in the [ConfigurableFirmata.ino](https://github.com/firmata/ConfigurableFirmata/blob/master/examples/ConfigurableFirmata/ConfigurableFirmata.ino) example file.
+Open und upload the included [MaterialBoard.ino](https://github.com/virtual-maker/MaterialBoard/blob/main/examples/MaterialBoard/MaterialBoard.ino) example file to your Arduino compatible microcontroller board. Then you are ready to use the board with the VirtualBoard extension for Visual Studio 2022.
 
 ## Supported boards
 
-ConfigurableFirmata is supported on a large variety of boards, both on 8-Bit microcontrollers such as the AVR-Based Arduinos as well as on 32-Bit microcontrollers such as the ESP32, Arduino Due or Raspberry Pi Pico.
+MaterialBoard is supported on a large variety of boards, both on 8-Bit microcontrollers such as the AVR-Based Arduinos as well as on 32-Bit microcontrollers such as the ESP32, Arduino Due or Raspberry Pi Pico.
 
 For details on particular boards see [this page](BoardSupport.md).
 
-## Firmata Wrapper Libraries
-
-You can use the ConfigurableFirmata architecture to wrap 3rd party libraries to include
-functionality not included in the base ConfigurableFirmata.ino example. See [FirmataEncoder](https://github.com/firmata/FirmataEncoder) for an example of a Firmata wrapper. To include a Firmata wrapper your
-ino file, you must install both the sketch and the 3rd party library into your `/Arduino/libraries/`
-directory (where all 3rd party libraries are installed).
-
-When creating a new Firmata wrapper library, you generally should not include the 3rd party
-library it wraps. For example, the Encoder library that FirmataEncoder wraps is not included with
-the FirmataEncoder library.
-
-If you create a wrapper library, prepend the name with 'Firmata'. Hence 'FirmataEncoder' in the
-referenced example. This will keep the wrapper libraries together in the user's Arduino libraries
-directory.
-
-A Firmata wrapper template library will be published soon along with instructions for creating
-a wrapper library.
-
-## Firmata Client Libraries
-Not all client libraries officially support ConfigurableFirmata, but the protocol implementation is the same as for StandardFirmata, so most libraries should work. These have been tested:
-
-* javascript
-  * [https://github.com/jgautier/firmata]
-  * [https://github.com/rwldrn/johnny-five]
-  * [http://breakoutjs.com]
-* perl
-  * [https://github.com/ntruchsess/perl-firmata]
-
-* java
-  * [https://www.diozero.com/]
-
-* C# / .NET
-  * [https://github.com/dotnet/iot] - recommended
-
-*Additional Firmata client libraries may work as well. If you're a client library developer and have verified that you library works with ConfigurableFirmata, please [open an issue](https://github.com/firmata/ConfigurableFirmata/issues) with a request to add the link.*
-
 ## Contributing
 
-If you discover a bug or would like to propose a new feature, please open a new [issue](https://github.com/firmata/ConfigurableFirmata/issues?sort=created&state=open).
+If you discover a bug or would like to propose a new feature, please open a new [issue](https://github.com/virtual-maker/MaterialBoard/issues?sort=created&state=open).
 
-To contribute, fork this repository and create a new topic branch for the bug, feature or other existing issue you are addressing. Submit the pull request against the *master* branch.
+To contribute, fork this repository and create a new topic branch for the bug, feature or other existing issue you are addressing. Submit the pull request against the *main* branch.
 
-You must thoroughly test your contributed code. In your pull request, describe tests performed to ensure that no existing code is broken and that any changes maintain backwards compatibility with the existing api. Test on multiple Arduino board variants if possible. We hope to enable some form of automated (or at least semi-automated) testing in the future, but for now any tests will need to be executed manually by the contributor and reviewers.
+You must thoroughly test your contributed code. In your pull request, describe tests performed to ensure that no existing code is broken and that any changes maintain backwards compatibility with the existing API. Test on multiple Arduino board variants if possible. We hope to enable some form of automated (or at least semi-automated) testing in the future, but for now any tests will need to be executed manually by the contributor and reviewers.
 
 Use [Artistic Style](http://astyle.sourceforge.net/) (astyle) to format your code. Set the following rules for the astyle formatter:
 
