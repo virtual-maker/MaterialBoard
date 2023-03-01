@@ -1,6 +1,6 @@
 {
   "name": "MaterialBoard",
-  "keywords": "interface, protocol",
+  "keywords": "interface, protocol, test",
   "description": "This library implements the Firmata protocol as a set of plugins that can be used to create applications to remotely interface with an Arduino board.",
   "repository": {
     "type": "git",
